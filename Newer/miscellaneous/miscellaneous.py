@@ -1,6 +1,7 @@
 from typing import Any, Callable, List, bool
 import queue
 import random
+import math
 
 
 def random_vector(len:int,
@@ -132,7 +133,57 @@ def pareto_non_dominated_front(objectives:List[Callable],
                     continue
     return F
 
+def binary_coding(value:float,
+                  p_min:float,
+                  p_max:float,
+                  accuracy:int
+)->float:
+    """
+    Binary encoding of real-value solutions.
 
+    Parameters:
+    - value: The real-value to be encoded.
+    - p_min: The minimum possible value for the variable.
+    - p_max: The maximum possible value for the variable.
+    - accuracy: The number of bits used for encoding.
+
+    Returns:
+    float: The binary-encoded value.
+
+    Example:
+    encoded_value = binary_coding(5.0, 0.0, 10.0, 8)
+    print(encoded_value)
+    """
+
+    N = int(math.log2(10**(accuracy)* (p_max, p_min))) +1
+    fixed_value = value * (p_max -p_min)/(2**N -1)
+    return fixed_value
+
+
+def schema_based_fitness(H:Any,
+                         population:List[Any],
+                         fitness:Callable,
+                         count:Callable
+)->Any:
+    
+    """
+    Calculate schema-based fitness.
+
+    Parameters:
+    - H: The schema.
+    - population: The list of individuals in the population.
+    - fitness: The fitness function.
+    - count: The function to count occurrences of the schema.
+
+    Returns:
+    Any: The schema-based fitness.
+
+    Example:
+    schema_fitness = schema_based_fitness(my_schema, my_population, calculate_fitness, count_schema_occurrences)
+    print(schema_fitness)
+    """
+
+    return sum(fitness(x) for x in H)/count(H, population)
 
 class IterableQueue(queue.Queue):
 
