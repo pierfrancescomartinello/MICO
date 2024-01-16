@@ -1,4 +1,4 @@
-from typing import Any, Callable
+from typing import Any, Callable, List
 import math
 from Newer.miscellaneous.miscellaneous import IterableQueue
 
@@ -424,3 +424,86 @@ def ILS_with_Random_Restarts(distribution:Callable,
         S = perturb(H)
         time -= 1
     pass
+
+
+def VNS(S:Any,
+        neighbourhoods:List[Any],
+        stopCondition:Callable,
+        random_solution:Callable,
+        local_search:Callable,
+        quality:Callable
+):
+    
+    """
+    Perform Variable Neighborhood Search (VNS).
+
+    Parameters:
+    - S: The initial solution.
+    - neighbourhoods: List of neighbourhood structures.
+    - stopCondition: A function to check the stopping condition.
+    - random_solution: A function to generate a random solution within a given neighbourhood.
+    - local_search: A local search algorithm to improve the solution.
+    - quality: A function to evaluate the quality of a solution.
+
+    Returns:
+    Any: The best solution found by the VNS algorithm.
+
+    Example:
+    best_solution = VNS(initial_solution, [neighbourhood1, neighbourhood2], stop_condition_function, random_solution_function, local_search_function, quality_function)
+    print(best_solution)
+    """
+
+    while not stopCondition():
+        index = 1
+        while index < len(neighbourhoods):
+            T = random_solution(neighbourhoods[index], S)
+            W = local_search(T)
+            if quality(W) >quality(S):
+                S = W
+                index = 1
+            else:
+                index += 1
+    return S
+
+def skewed_VNS(S:Any,
+               neighbourhoods:List[Any],
+               stopCondition:Callable,
+               random_solution:Callable,  
+               local_search:Callable,
+               quality:Callable,
+               alpha:float,
+               dist:Callable
+)->Any:
+    
+    """
+    Perform Skewed Variable Neighborhood Search (Skewed VNS).
+
+    Parameters:
+    - S: The initial solution.
+    - neighbourhoods: List of neighbourhood structures.
+    - stopCondition: A function to check the stopping condition.
+    - random_solution: A function to generate a random solution within a given neighbourhood.
+    - local_search: A local search algorithm to improve the solution.
+    - quality: A function to evaluate the quality of a solution.
+    - alpha: A parameter controlling the skewness.
+    - dist: A function to calculate the distance between two solutions.
+
+    Returns:
+    Any: The best solution found by the Skewed VNS algorithm.
+
+    Example:
+    best_solution = skewed_VNS(initial_solution, [neighbourhood1, neighbourhood2], stop_condition_function, random_solution_function, local_search_function, quality_function, alpha_value, distance_function)
+    print(best_solution)
+    """
+    
+    while not stopCondition():
+        index = 1
+        while index < len(neighbourhoods):
+            T = random_solution(neighbourhoods[index], S)
+            W = local_search(T)
+            if quality(W) >quality(S) -alpha*dist(W,S):
+                S = W
+                index = 1
+            else:
+                index += 1
+    return S
