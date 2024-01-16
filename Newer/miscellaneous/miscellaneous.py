@@ -2,6 +2,7 @@ from typing import Any, Callable, List, bool
 import queue
 import random
 
+
 def random_vector(len:int,
                   max:int | Any,
                   min:int | Any
@@ -73,6 +74,65 @@ def random_bit_vector(len:int
     """
 
     return [random.random() > 0.5 for _ in range(len)]
+
+def pareto_dominance(A:Any,
+                     B:Any,
+                     objectives:List[Callable]
+)-> bool:
+    
+    """
+    Check if solution A Pareto dominates solution B.
+
+    Parameters:
+    - A: The first solution.
+    - B: The second solution.
+    - objectives: A list of objective functions to evaluate the solutions.
+
+    Returns:
+    bool: True if A dominates B, False otherwise.
+
+    Example:
+    is_dominant = pareto_dominance(solution_A, solution_B, [objective_function_1, objective_function_2])
+    print(is_dominant)
+    """
+
+    for o in objectives:
+        if o(A) < o(B): return False
+    return True
+
+
+def pareto_non_dominated_front(objectives:List[Callable],
+                               subpop:List[Any]
+)-> List[Any]:
+    
+    """
+    Identify the Pareto non-dominated front in a population.
+
+    Parameters:
+    - objectives: A list of objective functions to evaluate the solutions.
+    - subpop: The subpopulation for which to find the non-dominated front.
+
+    Returns:
+    List[Any]: The non-dominated front.
+
+    Example:
+    non_dominated_front = pareto_non_dominated_front([objective_function_1, objective_function_2], population)
+    print(non_dominated_front)
+    """
+
+    F = List()
+    for s in subpop:
+        F.append(s)
+        for f in F:
+            if f ==s:continue
+            else:
+                if pareto_dominance(s, f, objectives): F.remove(f)
+                else: 
+                    F.remove(s)
+                    continue
+    return F
+
+
 
 class IterableQueue(queue.Queue):
 

@@ -1,5 +1,6 @@
 from typing import Any, Callable, List
 import random
+from miscellaneous import pareto_dominance as p_d
 
 if __name__ == "__main__":
     Vector = List[Any]
@@ -125,3 +126,32 @@ def tournament_selection_with_extraction(population:List[Vector],
         if not best or fitness(next_candidate) > fitness(best):
             best = next_candidate
     return best
+
+
+def pareto_dominance_binary_tournament_selection(population:List[Vector],
+                                                 objectives:List[Callable]
+)-> Vector:
+    
+    """
+    Perform binary tournament selection based on Pareto dominance.
+
+    Parameters:
+    - population: The list of vectors representing the population.
+    - objectives: A list of objective functions to evaluate the solutions.
+
+    Returns:
+    Vector: The selected vector based on binary tournament selection.
+
+    Example:
+    selected_vector = pareto_dominance_binary_tournament_selection(population_list, [objective_function_1, objective_function_2])
+    print(selected_vector)
+    """
+
+    a = population.pop(random.randint(0,len(population)-1))
+    b = population.pop(random.randint(0,len(population)-1))
+    if p_d(a,b,objectives):
+        return a
+    elif p_d(a,b,objectives):
+        return b
+    else: return (a,b)[random.randint(0,1)]
+
