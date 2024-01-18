@@ -1,3 +1,13 @@
+# Segna l'ordine delle città
+# Quality:
+#   vettore n-ario per rappresentare se l'elemento è presente nell'insieme n
+#   quality= somma elementi/numero di bin - deviazione dalla media per ogni singolo elemento
+# Tweak:
+#   Modifichiamo la soluzione
+# IsIdeal:
+#   non lo sappiamo
+
+
 def partition_greedy(nums):
     # Step 1: Sort the numbers in descending order
     sorted_nums = sorted(nums, reverse=True)

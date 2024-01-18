@@ -1,5 +1,13 @@
 from typing import List, Set, Dict
 
+# Segnati i bin come vettori binari [presente, assente]
+# Quality:
+#   quality= Numero elementi coperti dalla rappresentazione/numero totali di elementi * numero di set
+# Tweak:
+#    Prendiamo un set random e lo aggiungiamo/rimuoviamo dalla soluzione
+# IsIdeal:
+#   Non definito
+
 def greedy_set_cover(universe: Set[int], sets: List[Set[int]]) -> List[Set[int]]:
     """
     Solve the Set Covering problem using the Greedy Set Covering algorithm.

@@ -1,5 +1,14 @@
 from typing import Any, Callable, List, Tuple
 
+# Segnati i bin come vettori binari [presente, assente]
+# Quality:
+#   Sommiamo percentuali di riempimento minori o uguali a 1 e sottraiamo percentuali maggiori di 1
+#   quality = somme()/numero atteso di bin->(somme elementi/dimensione bin +1)
+# Tweak:
+#    Prendiamo un elemento random e lo spostiamo in un bin random
+# IsIdeal:
+#    (0.9<=percentuali di riempimento<= 1 o numero bin = numero di bin atteso)
+
 class Bin:
 
     """

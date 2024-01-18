@@ -1,5 +1,10 @@
-# You can add a fitness based on constraints relaxation and 
-# a tweak on which the element with most "problems" is moved to the most convenient position
+# Rappresentazione: Lista della posizione di riga delle regine per ogni colonna
+#
+#
+#Quality: per ogni regina -> (numero di regine totali - alpha*numero di regine in scacco)/numero di regine
+# quality = somma di prima()/numero di regine
+#
+# Tweak: cambio in modo random la posizione di un numero random di regine, usualmente 1
 
 def queens(n, i, a, b, c):
 

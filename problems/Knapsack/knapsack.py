@@ -1,3 +1,12 @@
+# Segna l'ordine delle città
+# Quality:
+#   vettore binario per rappresentare se l'elemento è presente
+#   quality= somma peso in knapsack rapportato al costo - alpha* somma peso che esce fuori dal knapsack
+# Tweak:
+#   Modifichiamo la soluzione
+# IsIdeal:
+#   non lo sappiamo
+
 def knapsack_01(weights, values, capacity):
 
     """

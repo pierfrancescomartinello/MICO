@@ -3,6 +3,15 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 
+# Segna l'ordine delle città
+# Quality:
+#   per ogni città misuro la distanza minore
+#   quality= somma che c'è sopra/costo del TSP attuale
+# Tweak:
+#    Prendiamo un elemento random e lo swappiamo nella soluzione
+# IsIdeal:
+#   non lo sappiamo
+
 def euclidean_distance(point_one, point_two):
         """
         Calculate the Euclidean distance between two 2-D Coordinates.

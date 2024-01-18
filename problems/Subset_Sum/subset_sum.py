@@ -1,3 +1,12 @@
+# Segnati i bin come vettori binari [presente, assente]
+# Quality:
+#   quality= expected_num /abs(expected_num - somma) if expected_num != somma else expected_sum 
+# Tweak:
+#    Prendiamo un elemento random e lo aggiungiamo/rimuoviamo dalla soluzione
+# IsIdeal:
+#   somma == expected_number
+
+
 def subset_sum(nums, target_sum):
     """
     Solve the Subset Sum problem and return the subset using dynamic programming.

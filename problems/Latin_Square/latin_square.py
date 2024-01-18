@@ -1,3 +1,10 @@
+# Rappresentazione: matrice
+#
+#Quality: per ogni elemento -> (numero di elementi totali negli assi - alpha*numero di elementi uguali)/numero di elementi totali negli assi
+# quality = somma di prima()/numero di elementi totali negli assi 
+#
+# Tweak: cambio in modo random il valore di un numero random di regine, usualmente 1
+
 def generate_latin_square(n):
     """
     Generate a Latin square of order n.

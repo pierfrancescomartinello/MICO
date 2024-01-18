@@ -4,6 +4,14 @@ import random
 import igraph
 import matplotlib.pyplot as plt
 
+# Rappresentazione: Lista di tuple di coppie di elementi
+#((node_1, colour),(node_2,colour))
+#
+#Quality: per ogni nodo -> somma di colori diversi tra i vicini - somma dei colori uguali tra i vicini
+# quality = somma di prima()/numero di colori
+#
+# Tweak: cambio in modo random il colore di un numero random di elementi
+
 def generate_random_colors(n, min_distance=100):
     """
     Generate a list of random RGB colors with a specified minimum distance between each color.
